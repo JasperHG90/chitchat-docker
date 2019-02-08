@@ -1,6 +1,18 @@
 # README
 
-## Compilation
+## Initial setup
+
+The initial setup of chitchat can be configured by calling:
+
+```
+bash bootstrap.sh
+```
+
+in a terminal. See 'manual setup' if you want to manually configure ChitChat
+
+## Manual setup
+
+### 1. Compiling the ChitChat `jar` file
 
 To compile `ChitChat`, you can simply build and run the `Dockerfile` in the 'build' folder.
 
@@ -14,24 +26,48 @@ docker run --rm --mount source=chitchat,target=/var/chitchat chitchat/chitchat_b
 
 This command stores the chitchat .jar file in a [docker volume](https://docs.docker.com/storage/volumes/) called 'chitchat'.
 
-## Setting up the database
-
-```
-docker network create chitchat-net
-```
+### 2. Setting up the database
 
 ```
 docker build database/. -t chitchat/chitchat_db
 ```
 
 ```
-docker run -d --net=chitchat-net --env-file env.list chitchat/chitchat_db
+docker build app/. -t chitchat/chitchat_app
 ```
 
-## Running chitchat
+Run a helper docker container
 
 ```
-docker build app/. -t chitchat/chitchat_app && docker run --rm --mount source=chitchat,target=/var/chitchat chitchat/chitchat_app
+docker run --mount source=chitchat,target=/var/chitchat --name helper busybox
+```
+
+Copy your `settings.yml` file
+
+```
+docker cp settings.yml helper:/var/chitchat/settings.yml
+```
+
+When you're done, shut the helper container down
+
+```
+docker rm helper
+```
+
+```
+docker run -d --rm --mount source=chitchat_postgres,target=/var/lib/postgresql/data --env-file env.list --name chitchat_database chitchat/chitchat_db
+```
+
+```
+docker run --mount source=chitchat,target=/var/chitchat --link=chitchat_database:database chitchat/chitchat_app db migrate settings.yml
+```
+
+### 3. Running chitchat
+
+
+
+```
+docker run --rm --mount source=chitchat,target=/var/chitchat chitchat/chitchat_app
 ```
 
 ## Updating settings
@@ -45,7 +81,13 @@ docker run --mount source=chitchat,target=/var/chitchat --name helper busybox
 Copy your `settings.yml` file
 
 ```
-docker cp settings.yml . helper:/var/chitchat/settings.yml
+docker cp settings.yml helper:/var/chitchat/settings.yml
+```
+
+When you're done, shut the helper container down
+
+```
+docker rm helper
 ```
 
 ### Technical notes on the docker setup
