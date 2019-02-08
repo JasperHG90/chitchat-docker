@@ -1,0 +1,69 @@
+version: '3'
+# Define the services used for the application
+services:
+
+  ################# PostGres container ####################
+  ##      Database used by the chitchat application      ##
+  #########################################################
+
+  database:
+    image: "postgres:9.6.5"
+    # Define a volume on disk that stores postgres data
+    volumes:
+      - "chitchat:/var/lib/postgresql/data"
+    # Sets environment variables (postgres user / password etc.)
+    env_file:
+      - env_file
+    # Create this network ==> links to the chitchat container
+    networks:
+      - backend_network
+    # If things go badly ...
+    restart: always
+
+  ################# ChitChat container ####################
+  ##   ChitChat application ==> depends on the database  ##
+  #########################################################
+
+  chitchat:
+    build: ./app/
+    # Pass the env file so that this container also has access to postgres
+    env_file:
+      - env_file
+    # Depends on the database and host networks
+    networks:
+      - backend_network
+      - frontend_network
+    # Expose these ports
+    expose:
+      - "5678"
+    # Define startup order ==> chitchat should start after 'database' container
+    depends_on:
+      - database
+      - chitchat_build
+    restart: always
+
+  ################### NGINX container #####################
+  ## Provides reverse proxy for the user to connect to   ##
+  #########################################################
+
+  nginx:
+    image: "nginx:1.9"
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf:ro
+    # Only depends on the frontend network
+    networks:
+      - frontend_network
+    restart: always
+
+# Define the networks used for this cluster
+networks:
+  backend_network:
+    driver: bridge
+  frontend_network:
+    driver: bridge
+
+# Define volumes for postgres
+volumes:
+  chitchat:
