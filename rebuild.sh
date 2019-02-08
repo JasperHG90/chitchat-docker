@@ -7,6 +7,7 @@ docker run --rm --mount source=chitchat,target=/var/chitchat chitchat/chitchat_b
 # Retrieve the new VERSION.txt file
 docker run --mount source=chitchat,target=/var/chitchat --name helper busybox
 docker cp helper:/var/chitchat/VERSION.txt VERSION.txt
+docker cp settings.yml helper:/var/chitchat/settings.yml
 docker rm helper
 
 # Read VERSION
