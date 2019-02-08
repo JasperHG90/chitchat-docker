@@ -77,7 +77,15 @@ docker-compose up -d
 
 ## If you know what you're doing ...
 
-If you would like to use a specific version of ChitChat (basically down to the commit), then you should change [this line](https://github.com/JasperHG90/chitchat-docker/blob/master/build/Dockerfile#L5) in `build/Dockerfile`. At the very least, you should then rebuild the `chitchat_build` image by executing
+If you would like to use a specific version of ChitChat (basically down to the commit), then you should change [this line](https://github.com/JasperHG90/chitchat-docker/blob/master/build/Dockerfile#L5) in `build/Dockerfile`.
+
+Then, stop the ChitChat services
+
+```
+docker-compose down
+```
+
+At the very least, you should then rebuild the `chitchat_build` image by executing
 
 ```
 docker build build/. -t chitchat/chitchat_build
@@ -90,6 +98,10 @@ docker run --rm --mount source=chitchat,target=/var/chitchat chitchat/chitchat_b
 ```
 
 It is possible that you have to re-initialize the postgresql database due to migrating to a new version. However, this is not common. You can most likely simply execute `docker-compose up` and continue where you left off.
+
+```
+docker-compose up -d
+```
 
 ## Downloading specific versions of ChitChat
 
