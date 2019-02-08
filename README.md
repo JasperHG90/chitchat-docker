@@ -85,13 +85,13 @@ Then, stop the ChitChat services
 docker-compose down
 ```
 
-At the very least, you should then rebuild the `chitchat_build` image by executing
+At the very least, you should rebuild the `chitchat_build` image by executing
 
 ```
 docker build build/. -t chitchat/chitchat_build
 ```
 
-Then, build a new `jar` file by executing
+Build a new `jar` file by executing
 
 ```
 docker run --rm --mount source=chitchat,target=/var/chitchat chitchat/chitchat_build
