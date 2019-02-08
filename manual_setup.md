@@ -40,6 +40,12 @@ Now, use `docker cp` to copy your local `settings.yml` file
 docker cp settings.yml helper:/var/chitchat/settings.yml
 ```
 
+You should also copy the `VERSION.txt` file to your host machine. This file contains the ChitChat version you're using
+
+```
+docker cp helper:/var/chitchat/VERSION.txt VERSION.txt
+```
+
 When you're done, shut the helper container down
 
 ```

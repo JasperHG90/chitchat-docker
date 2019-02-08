@@ -41,6 +41,10 @@ To shut down the service, execute
 docker-compose down
 ```
 
+## Which version of ChitChat am I using?
+
+After the (manual) configuration of ChitChat, you will find a file called `VERSION.txt` containing the ChitChat version.
+
 ## Updating settings
 
 If you update the `settings.yml` file in this directory, you will need to copy it to the `chitchat` docker volume for it to take effect. We do this by creating a small helper container so that we can access the volume.
@@ -95,6 +99,14 @@ Build a new `jar` file by executing
 
 ```
 docker run --rm --mount source=chitchat,target=/var/chitchat chitchat/chitchat_build
+```
+
+Retrieve the new `VERSION.txt` file
+
+```
+docker run --mount source=chitchat,target=/var/chitchat --name helper busybox
+docker cp helper:/var/chitchat/VERSION.txt VERSION.txt
+docker rm helper
 ```
 
 It is possible that you have to re-initialize the postgresql database due to migrating to a new version. However, this is not common. You can most likely simply execute `docker-compose up` and continue where you left off.

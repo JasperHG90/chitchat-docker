@@ -9,6 +9,8 @@ docker run --rm --mount source=chitchat,target=/var/chitchat chitchat/chitchat_b
 # Copy local settings to the 'chitchat' volume using the 'helper' container
 docker run --mount source=chitchat,target=/var/chitchat --name helper busybox
 docker cp settings.yml helper:/var/chitchat/settings.yml
+# Copy the ChitChat version to the host
+docker cp helper:/var/chitchat/VERSION.txt VERSION.txt
 docker rm helper
 
 # Build 'database' container
