@@ -1,0 +1,159 @@
+facebookSettings:
+  credentials:
+  - accessToken: dfadf
+    appId: dfdf
+    appSecret: df
+    pageId: 222190731242540
+    verificationToken: dfdfdfdf
+
+maxConversationTimeIntervalSeconds: 600
+
+languageProcessing:
+  en:
+    normalizers: [default, kstem]
+    features: [tokenizer, datasheet, stopwords] # tokenizer, stopwords, datasheet, synonyms, ner (all), ner-person, ner-date, ner-time, ner-location
+    wordTokenizer: matching
+    sentenceSplitter: simple
+  ar:
+    features: [datasheet]
+    normalizers: [default, stem]
+  fr:
+    normalizers: [default, stem]
+    features: [datasheet]
+  es:
+    normalizers: [default, stem]
+    features: [datasheet]
+  wo:
+    normalizers: [default]
+    features: [datasheet]
+
+prettyPrintJsonResponse: true
+
+swagger:
+  title: ChitChat
+  description: ChitChat API
+  resourcePackage: org.c4i.chitchat.api.resource
+
+auth:
+  type: basiclist
+  credentials:
+    - user:
+        name: chitchat
+        roles: [BASIC_GUY]
+      salt: 78kdnqa669u9dssvvtn9qmbngpigsvrbufe6q4r0259h7cpdgiub
+      hashedPassword: bee330e0b95cb8437ff34d28afa2158cf6674cd6ba3fb5e590cf756f49a384ac
+    - user:
+        name: admin
+        roles: [BASIC_GUY, ADMIN]
+      salt: 3tl7qo9ntsbjmkve6mdfvoel9tqv6e2nsd323p17mvbccsfbk6j7
+      hashedPassword: 2c9b9f23ef927ac501a9d67bb42f007c66ecea60b1040a42d33e130185c39ce4
+
+server:
+  type: simple
+
+  # Rest api prefix
+  rootPath: /api/v1/*
+
+  # Frontend prefix
+  applicationContextPath: /
+
+  # Admin prefix
+  adminContextPath: /admin
+
+  connector:
+    type: http
+    port: 5678
+  gzip:
+    bufferSize: 8KiB
+
+  requestLog:
+    appenders:
+      - type: console
+        threshold: ALL
+        timeZone: UTC
+        target: stdout
+        # https://logback.qos.ch/manual/layouts.html#AccessPatternLayout
+        logFormat: "[%t{yyyy-MM-dd HH:mm:ss,SSS}] %statusCode %requestURL %elapsedTime"
+        #logFormat: "%requestMethod %statusCode [%t{yyyy-MM-dd HH:mm:ss,SSS}] %remoteIP %requestURL %elapsedTime"
+      - type: file
+        currentLogFilename: log/access-chitchat.log
+        threshold: ALL
+        archive: true
+        archivedLogFilenamePattern: log/access-chitchat-%d.log
+        archivedFileCount: 5
+        timeZone: UTC
+        logFormat: "[%t{yyyy-MM-dd HH:mm:ss,SSS}] %statusCode %requestURL %elapsedTime"
+
+logging:
+  level: INFO
+  appenders:
+    - type: console
+      threshold: ALL
+      timeZone: UTC
+      target: stdout
+    - type: file
+      currentLogFilename: log/chitchat.log
+      threshold: WARN
+      archive: true
+      archivedLogFilenamePattern: log/chitchat-%d.log
+      archivedFileCount: 5
+      timeZone: UTC
+  loggers:
+    "message":
+      level: INFO
+      additive: false
+      appenders:
+        - type: file
+          currentLogFilename: log/message.log
+          archivedLogFilenamePattern: log/message-%d.log.gz
+          archivedFileCount: 5
+    "simplemessage":
+      level: INFO
+      additive: false
+      appenders:
+        - type: file
+          currentLogFilename: log/simplemessage.log
+          archivedLogFilenamePattern: log/simplemessage-%d.log
+          archivedFileCount: 5
+
+
+database:
+  # the name of your JDBC driver
+  driverClass: org.postgresql.Driver
+
+  # the username
+  user: chitchat
+
+  # the password
+  password: secret
+
+  # the JDBC URL
+  url: jdbc:postgresql://pokalhost:5432/chitchat
+
+  # any properties specific to your JDBC driver:
+  properties:
+    charSet: UTF-8
+
+  # the maximum amount of time to wait on an empty pool before throwing an exception
+  maxWaitForConnection: 1s
+
+  # the SQL query to run when validating a connection's liveness
+  validationQuery: "/* MyService Health Check */ SELECT 1"
+
+  # the timeout before a connection validation queries fail
+  validationQueryTimeout: 3s
+
+  # the minimum number of connections to keep open
+  minSize: 8
+
+  # the maximum number of connections to keep open
+  maxSize: 32
+
+  # whether or not idle connections should be validated
+  checkConnectionWhileIdle: false
+
+  # the amount of time to sleep between runs of the idle connection validation, abandoned cleaner and idle pool resizing
+  evictionInterval: 10s
+
+  # the minimum amount of time an connection must sit idle in the pool before it is eligible for eviction
+  minIdleTime: 1 minute
