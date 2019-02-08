@@ -1,5 +1,7 @@
 # README
 
+This repository contains a [Docker](https://www.docker.com/) setup for the [ChitChat](https://bitbucket.org/arvid/chitchat/overview) chatbot developed at the [Leiden University Center for Innovation](https://www.centre4innovation.org/).
+
 ## Initial setup
 
 The initial setup of chitchat can be configured by calling:
@@ -12,68 +14,14 @@ in a terminal. See 'manual setup' if you want to manually configure ChitChat.
 
 ## Manual setup
 
-### 1. Compiling the ChitChat `jar` file
-
-To compile `ChitChat`, you can simply build and run the `Dockerfile` in the 'build' folder.
-
-```
-docker build build/. -t chitchat/chitchat_build
-```
-
-```
-docker run --rm --mount source=chitchat,target=/var/chitchat chitchat/chitchat_build
-```
-
-This command stores the chitchat .jar file in a [docker volume](https://docs.docker.com/storage/volumes/) called 'chitchat'.
-
-### 2. Setting up the database
-
-```
-docker build database/. -t chitchat/chitchat_db
-```
-
-```
-docker build app/. -t chitchat/chitchat_app
-```
-
-Run a helper docker container
-
-```
-docker run --mount source=chitchat,target=/var/chitchat --name helper busybox
-```
-
-Copy your `settings.yml` file
-
-```
-docker cp settings.yml helper:/var/chitchat/settings.yml
-```
-
-When you're done, shut the helper container down
-
-```
-docker rm helper
-```
-
-Start the database container
-
-```
-docker run -d --rm --mount source=chitchat_postgres,target=/var/lib/postgresql/data --env-file env.list --name chitchat_database chitchat/chitchat_db
-```
-
-Call the migration script
-
-```
-docker run --rm --mount source=chitchat,target=/var/chitchat --link=chitchat_database:database chitchat/chitchat_app db migrate settings.yml
-```
-
-Your containers are now configured
+You can follow the manual setup [here](https://github.com/JasperHG90/chitchat-docker/blob/master/manual_setup.md)
 
 ## Running chitchat
 
 To run ChitChat, execute
 
 ```
-docker-compose -d up
+docker-compose up -d
 ```
 
 in a terminal. The service will now be available at [http://localhost/api/v1/ui](http://localhost/api/v1/ui)
@@ -86,13 +34,13 @@ docker-compose down
 
 ## Updating settings
 
-Run a helper docker container
+If you update the `settings.yml` file in this directory, you will need to copy it to the `chitchat` docker volume for it to take effect. We do this by creating a small helper container so that we can access the volume.
 
 ```
 docker run --mount source=chitchat,target=/var/chitchat --name helper busybox
 ```
 
-Copy your `settings.yml` file
+Now, use `docker cp` to copy your local `settings.yml` file
 
 ```
 docker cp settings.yml helper:/var/chitchat/settings.yml
@@ -104,7 +52,9 @@ When you're done, shut the helper container down
 docker rm helper
 ```
 
-### Technical notes on the docker setup
+You can now run `docker-compose up` with your changed settings.
+
+### Downloading specific versions of ChitChat
 
 This docker setup generally follows the latest stable release of the ChitChat chatbot.
 
@@ -112,4 +62,4 @@ This docker setup generally follows the latest stable release of the ChitChat ch
 * the development branch may incorporate development code.
 * previous versions are tagged by their ChitChat version number on the [releases](https://github.com/JasperHG90/chitchat-docker/releases) page. If you want a previous  version of the chatbot, you are advised to download the zip file from the releases page.
 
-The docker setup depends on a rather static declaration of the chitchat version. This means the following:
+<img src="img/center-for-innovation.png" width="200">
