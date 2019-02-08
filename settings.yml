@@ -128,7 +128,7 @@ database:
   password: secret
 
   # the JDBC URL
-  url: jdbc:postgresql://pokalhost:5432/chitchat
+  url: jdbc:postgresql://database:5432/chitchat
 
   # any properties specific to your JDBC driver:
   properties:
