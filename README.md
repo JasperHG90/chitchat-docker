@@ -43,7 +43,7 @@ docker-compose down
 
 ## Which version of ChitChat am I using?
 
-After the (manual) configuration of ChitChat, you will find a file called `VERSION.txt` containing the ChitChat version.
+After the (manual) configuration of ChitChat, you will find a file called `VERSION.txt` in the root folder containing the ChitChat version.
 
 ## Updating settings
 
