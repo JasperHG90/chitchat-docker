@@ -7,13 +7,15 @@ services:
   #########################################################
 
   database:
-    image: ./database/
+    build: ./database/
+    # Tag the above build with the following image name
+    image: chitchat_db:latest
     # Define a volume on disk that stores postgres data
     volumes:
-      - "chitchat:/var/lib/postgresql/data"
+      - "chitchat_postgres:/var/lib/postgresql/data"
     # Sets environment variables (postgres user / password etc.)
     env_file:
-      - env_file
+      - env.list
     # Create this network ==> links to the chitchat container
     networks:
       - backend_network
@@ -26,20 +28,25 @@ services:
 
   chitchat:
     build: ./app/
-    # Pass the env file so that this container also has access to postgres
-    env_file:
-      - env_file
+    # Tag the above build with the following image name
+    image: chitchat_app:latest
+    # Attach the volume containing the build
+    volumes:
+      - "chitchat:/var/chitchat"
     # Depends on the database and host networks
     networks:
       - backend_network
       - frontend_network
+    # Link to database
+    links:
+      - database
     # Expose these ports
     expose:
       - "5678"
     # Define startup order ==> chitchat should start after 'database' container
+    # Note that this does not always work
     depends_on:
       - database
-      - chitchat_build
     restart: always
 
   ################### NGINX container #####################
@@ -65,5 +72,10 @@ networks:
     driver: bridge
 
 # Define volumes for postgres
+# External: true means that the volumes have been made outside of this docker-compose environment.
+#  i.e. they have already been configured in the boostrap environment
 volumes:
   chitchat:
+    external: true
+  chitchat_postgres:
+    external: true
