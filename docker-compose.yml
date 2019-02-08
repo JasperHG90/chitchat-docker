@@ -9,7 +9,7 @@ services:
   database:
     build: ./database/
     # Tag the above build with the following image name
-    image: chitchat_db:latest
+    image: chitchat/chitchat_db:latest
     # Define a volume on disk that stores postgres data
     volumes:
       - "chitchat_postgres:/var/lib/postgresql/data"
@@ -29,7 +29,7 @@ services:
   chitchat:
     build: ./app/
     # Tag the above build with the following image name
-    image: chitchat_app:latest
+    image: chitchat/chitchat_app:latest
     # Attach the volume containing the build
     volumes:
       - "chitchat:/var/chitchat"
@@ -73,7 +73,7 @@ networks:
 
 # Define volumes for postgres
 # External: true means that the volumes have been made outside of this docker-compose environment.
-#  i.e. they have already been configured in the boostrap environment
+#  i.e. they have already been configured in the boostrap script
 volumes:
   chitchat:
     external: true
