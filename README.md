@@ -21,6 +21,8 @@ bash bootstrap.sh
 
 in a terminal. See 'manual setup' if you want to manually configure ChitChat.
 
+For more information about the setup of the ChitChat docker environment, see [this](https://github.com/JasperHG90/chitchat-docker/blob/master/docs/chitchat_docker.md) document.
+
 ## Manual setup
 
 You can follow the manual setup [here](https://github.com/JasperHG90/chitchat-docker/blob/master/docs/manual_setup.md)
@@ -43,7 +45,7 @@ docker-compose down
 
 ## Which version of ChitChat am I using?
 
-After the (manual) configuration of ChitChat, you will find a file called `VERSION.txt` in the root folder containing the ChitChat version.
+After the (manual) configuration of ChitChat, you will find a file called `VERSION.txt` in the root folder that contains the ChitChat version you're currently using.
 
 ## Updating settings
 
