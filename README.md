@@ -36,8 +36,10 @@ docker build app/. -t chitchat/chitchat_app && docker run --rm --mount source=ch
 
 ### Technical notes on the docker setup
 
-The docker setup depends on a rather static declaration of the chitchat version. This means the following:
+This docker setup generally follows the latest stable release of the ChitChat chatbot.
 
-1. During the build process, the docker image responsible for building the chitchat jar file will use a specific commit as a reference point.
-2. This means that, if you change this commit, you **must also make specific note of the version of chitchat**. This is information that is stored in the [pom.xml](https://bitbucket.org/arvid/chitchat/src/dfca7f03716a1850f945b37406753fc80d2847eb/pom.xml?at=master&fileviewer=file-view-default#pom.xml-9) file.
-3. However, if you change the commit, you can also simply observe the build and copy the version from the final output of the build process. This **version should then be changed in the `env_file`**
+* the master branch uses the latest stable release of the chatbot
+* the development branch may incorporate development code.
+* previous versions are tagged by their ChitChat version number on the [releases](https://github.com/JasperHG90/chitchat-docker/releases) page. If you want a previous  version of the chatbot, you are advised to download the zip file from the releases page.
+
+The docker setup depends on a rather static declaration of the chitchat version. This means the following:
