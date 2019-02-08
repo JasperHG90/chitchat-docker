@@ -10,6 +10,6 @@ docker cp helper:/var/chitchat/VERSION.txt VERSION.txt
 docker rm helper
 
 # Read VERSION
-ccversion='cat VERSION.txt'
+ccversion=$( cat VERSION.txt )
 
 echo "Finished building ${ccversion}"
