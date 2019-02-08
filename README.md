@@ -34,6 +34,20 @@ docker run -d --net=chitchat-net --env-file env.list chitchat/chitchat_db
 docker build app/. -t chitchat/chitchat_app && docker run --rm --mount source=chitchat,target=/var/chitchat chitchat/chitchat_app
 ```
 
+## Updating settings
+
+Run a helper docker container
+
+```
+docker run --mount source=chitchat,target=/var/chitchat --name helper busybox
+```
+
+Copy your `settings.yml` file
+
+```
+docker cp settings.yml . helper:/var/chitchat/settings.yml
+```
+
 ### Technical notes on the docker setup
 
 This docker setup generally follows the latest stable release of the ChitChat chatbot.
