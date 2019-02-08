@@ -2,6 +2,15 @@
 
 This repository contains a [Docker](https://www.docker.com/) setup for the [ChitChat](https://bitbucket.org/arvid/chitchat/overview) chatbot developed at the [Leiden University Center for Innovation](https://www.centre4innovation.org/).
 
+## Required software
+
+This software depends on a working installation of:
+
+- [Docker](https://www.docker.com/get-started)
+- [Docker-compose](https://docs.docker.com/compose/install/)
+
+But that's pretty much all you need :-).
+
 ## Initial setup
 
 The initial setup of chitchat can be configured by calling:
