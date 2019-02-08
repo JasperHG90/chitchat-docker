@@ -7,7 +7,7 @@ services:
   #########################################################
 
   database:
-    image: "postgres:9.6.5"
+    image: ./database/
     # Define a volume on disk that stores postgres data
     volumes:
       - "chitchat:/var/lib/postgresql/data"
