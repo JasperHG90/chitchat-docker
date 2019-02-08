@@ -23,7 +23,7 @@ in a terminal. See 'manual setup' if you want to manually configure ChitChat.
 
 ## Manual setup
 
-You can follow the manual setup [here](https://github.com/JasperHG90/chitchat-docker/blob/master/manual_setup.md)
+You can follow the manual setup [here](https://github.com/JasperHG90/chitchat-docker/blob/master/docs/manual_setup.md)
 
 ## Running chitchat
 
@@ -47,7 +47,7 @@ After the (manual) configuration of ChitChat, you will find a file called `VERSI
 
 ## Updating settings
 
-If you update the `settings.yml` file in this directory, you will need to copy it to the `chitchat` docker volume for it to take effect. We do this by creating a small helper container so that we can access the volume.
+If you update the `settings.yml` file in this directory, you will need to copy it to the `chitchat` docker volume for it to take effect.
 
 First, stop the ChitChat services
 
@@ -55,22 +55,10 @@ First, stop the ChitChat services
 docker-compose down
 ```
 
-Next, start a basic container
+Then, run the following line in a terminal
 
 ```
-docker run --mount source=chitchat,target=/var/chitchat --name helper busybox
-```
-
-Now, use `docker cp` to copy your local `settings.yml` file
-
-```
-docker cp settings.yml helper:/var/chitchat/settings.yml
-```
-
-When you're done, shut the helper container down
-
-```
-docker rm helper
+bash update_settings.sh
 ```
 
 You can now run `docker-compose up` with your changed settings:
@@ -78,6 +66,8 @@ You can now run `docker-compose up` with your changed settings:
 ```
 docker-compose up -d
 ```
+
+You may also do this [manually](https://github.com/JasperHG90/chitchat-docker/blob/master/docs/manual_settings.md)
 
 ## If you know what you're doing ...
 
@@ -88,8 +78,6 @@ Then, stop the ChitChat services
 ```
 docker-compose down
 ```
-
-### Using the `rebuild.sh` script
 
 You can easily rebuild ChitChat by executing
 
@@ -105,33 +93,7 @@ docker-compose up -d
 
 and continue where you left off.
 
-### Manually rebuilding ChitChat
-
-At the very least, you should rebuild the `chitchat_build` image by executing
-
-```
-docker build build/. -t chitchat/chitchat_build
-```
-
-Build a new `jar` file by executing
-
-```
-docker run --rm --mount source=chitchat,target=/var/chitchat chitchat/chitchat_build
-```
-
-Retrieve the new `VERSION.txt` file
-
-```
-docker run --mount source=chitchat,target=/var/chitchat --name helper busybox
-docker cp helper:/var/chitchat/VERSION.txt VERSION.txt
-docker rm helper
-```
-
-It is possible that you have to re-initialize the postgresql database due to migrating to a new version. However, this is not common. You can most likely simply execute `docker-compose up` and continue where you left off.
-
-```
-docker-compose up -d
-```
+You may also do this [manually](https://github.com/JasperHG90/chitchat-docker/blob/master/docs/manual_rebuild.md)
 
 ## Downloading specific versions of ChitChat
 
