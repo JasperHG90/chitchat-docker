@@ -89,6 +89,24 @@ Then, stop the ChitChat services
 docker-compose down
 ```
 
+### Using the `rebuild.sh` script
+
+You can easily rebuild ChitChat by executing
+
+```
+bash rebuild.sh
+```
+
+Then, execute
+
+```
+docker-compose up -d
+```
+
+and continue where you left off.
+
+### Manually rebuilding ChitChat
+
 At the very least, you should rebuild the `chitchat_build` image by executing
 
 ```
