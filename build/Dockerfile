@@ -2,7 +2,8 @@ FROM maven:3.3.9-jdk-8
 
 # Install git and pull chitchat
 RUN apt-get update && apt-get -y install git
-RUN git clone https://bitbucket.org/arvid/chitchat.git && cd chitchat && git checkout dfca7f0
+RUN git clone https://bitbucket.org/arvid/chitchat.git
+RUN cd chitchat && git pull && git checkout dfca7f0
 
 # build ==> skip the dependency check because it throws an error
 #  Do:
