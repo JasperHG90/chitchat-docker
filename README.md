@@ -63,7 +63,23 @@ docker rm helper
 
 You can now run `docker-compose up` with your changed settings.
 
-### Downloading specific versions of ChitChat
+## If you know what you're doing ...
+
+If you would like to use a specific version of ChitChat (basically down to the commit), then you should change [this line](https://github.com/JasperHG90/chitchat-docker/blob/master/build/Dockerfile#L5) in `build/Dockerfile`. At the very least, you should then rebuild the `chitchat_build` image by executing
+
+```
+docker build build/. -t chitchat/chitchat_build
+```
+
+Then, build a new `jar` file by executing
+
+```
+docker run --rm --mount source=chitchat,target=/var/chitchat chitchat/chitchat_build
+```
+
+It is possible that you have to re-initialize the postgresql database due to migrating to a new version. However, this is not common. You can most likely simply execute `docker-compose up` and continue where you left off.
+
+## Downloading specific versions of ChitChat
 
 This docker setup generally follows the latest stable release of the ChitChat chatbot.
 
