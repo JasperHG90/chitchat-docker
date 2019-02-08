@@ -8,13 +8,7 @@ The initial setup of chitchat can be configured by calling:
 bash bootstrap.sh
 ```
 
-in a terminal. See 'manual setup' if you want to manually configure ChitChat
-
-## Run the services
-
-```
-docker-compose -d up
-```
+in a terminal. See 'manual setup' if you want to manually configure ChitChat.
 
 ## Manual setup
 
@@ -60,20 +54,34 @@ When you're done, shut the helper container down
 docker rm helper
 ```
 
+Start the database container
+
 ```
 docker run -d --rm --mount source=chitchat_postgres,target=/var/lib/postgresql/data --env-file env.list --name chitchat_database chitchat/chitchat_db
 ```
 
-```
-docker run --mount source=chitchat,target=/var/chitchat --link=chitchat_database:database chitchat/chitchat_app db migrate settings.yml
-```
-
-### 3. Running chitchat
-
-
+Call the migration script
 
 ```
-docker run --rm --mount source=chitchat,target=/var/chitchat chitchat/chitchat_app
+docker run --rm --mount source=chitchat,target=/var/chitchat --link=chitchat_database:database chitchat/chitchat_app db migrate settings.yml
+```
+
+Your containers are now configured
+
+## Running chitchat
+
+To run ChitChat, execute
+
+```
+docker-compose -d up
+```
+
+in a terminal. The service will now be available at [http://localhost/api/v1/ui](http://localhost/api/v1/ui)
+
+To shut down the service, execute
+
+```
+docker-compose down
 ```
 
 ## Updating settings
