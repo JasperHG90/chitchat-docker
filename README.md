@@ -10,6 +10,12 @@ bash bootstrap.sh
 
 in a terminal. See 'manual setup' if you want to manually configure ChitChat
 
+## Run the services
+
+```
+docker-compose -d up
+```
+
 ## Manual setup
 
 ### 1. Compiling the ChitChat `jar` file
