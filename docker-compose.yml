@@ -40,6 +40,9 @@ services:
     # Link to database
     links:
       - database
+    # Pass version as env variable
+    env_file:
+      - VERSION.txt
     # Expose these ports
     expose:
       - "5678"
