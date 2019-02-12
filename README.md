@@ -97,6 +97,14 @@ and continue where you left off.
 
 You may also do this [manually](https://github.com/JasperHG90/chitchat-docker/blob/master/docs/manual_rebuild.md)
 
+## Dumping and restoring databases
+
+See the docs [here](https://github.com/JasperHG90/chitchat-docker/blob/master/docs/postgres.md)
+
+## Removing ChitChat
+
+See the docs [here](https://github.com/JasperHG90/chitchat-docker/blob/master/docs/removing_chitchat.md)
+
 ## Downloading specific versions of ChitChat
 
 This docker setup generally follows the latest stable release of the ChitChat chatbot.
