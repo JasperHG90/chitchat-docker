@@ -105,4 +105,4 @@ This docker setup generally follows the latest stable release of the ChitChat ch
 * the development branch may incorporate development code.
 * previous versions are tagged by their ChitChat version number on the [releases](https://github.com/JasperHG90/chitchat-docker/releases) page. If you want a previous  version of the chatbot, you are advised to download the zip file from the releases page.
 
-<img src="img/center-for-innovation.png" width="200">
+<img src="docs/img/center-for-innovation.png" width="200">
