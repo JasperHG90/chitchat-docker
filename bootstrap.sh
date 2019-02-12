@@ -1,4 +1,4 @@
-#!/bin.bash
+#!/bin/bash
 
 # Build 'build' container
 docker build build/. -t chitchat/chitchat_build
