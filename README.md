@@ -107,6 +107,10 @@ See the docs [here](https://github.com/JasperHG90/chitchat-docker/blob/master/do
 
 See the docs [here](https://github.com/JasperHG90/chitchat-docker/blob/master/docs/postgres.md)
 
+## Hosting ChitChat
+
+See an example [here](https://github.com/JasperHG90/chitchat-docker/blob/master/docs/configuring_and_hosting.md)
+
 ## Removing ChitChat
 
 See the docs [here](https://github.com/JasperHG90/chitchat-docker/blob/master/docs/removing_chitchat.md)
