@@ -13,6 +13,8 @@ But that's pretty much all you need :-).
 
 ## Initial setup
 
+**NOTE:** You may need to use superuser ('sudo') privileges for the commands below. If you see a permissions error, simply prepend 'sudo' to the command.
+
 The initial setup of chitchat can be configured by calling:
 
 ```
