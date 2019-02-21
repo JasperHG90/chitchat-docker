@@ -58,6 +58,8 @@ services:
 
   nginx:
     build: ./serve/
+    # tag
+    image: chitchat/chitchat_serve:latest
     ports:
       - "80:80"
     volumes:

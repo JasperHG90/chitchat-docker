@@ -107,7 +107,7 @@ sudo openssl dhparam -out /docker/letsencrypt-docker-nginx/src/production/dh-par
 
 ![changenginx](img/changenginx.png)
 
-Now, replace the `nginx` block (surrounded by red rectangle in the image above) with the following. **NOTE: Make sure that you replace <YOURDOMAINNAME> with the domain name you used in step 4**:
+Now, replace the `nginx` block (surrounded by red rectangle in the image above) with the following. **NOTE: Make sure that you replace `<YOURDOMAINNAME>` with the domain name you used in step 4**:
 
 ```yml
 nginx:
