@@ -89,4 +89,33 @@ sudo chmod +x /usr/local/bin/docker-compose
 git clone https://github.com/JasperHG90/chitchat-docker.git
 ```
 
-13. Follow the setup guide in the repository README
+Enter the folder
+
+```shell
+cd chitchat-docker
+```
+
+13. Set up the docker environment
+
+```shell
+sudo bash bootstrap.sh
+```
+
+14. On the server, execute
+
+```bash
+nano nginx.conf
+```
+
+and change the line indicated in the image below with the red rectangle.
+
+![DO2](img/nginxconf.png)
+
+The line should be changed to either:
+
+1. `server_name <server-ip-address>` - for example `server_name 123.45.678.901`
+2. `server_name <domainname>.<extension> www.<domainname>.<extension>` - for example `server_name myapp.nl www.myapp.nl`
+
+press `control + X`, then `Y` and then `<enter>` to save the settings.
+
+15. You can now execute `docker-compose up -d` and go to either http://myipaddress or http://www.mywebsite.myextension to view the docker service.

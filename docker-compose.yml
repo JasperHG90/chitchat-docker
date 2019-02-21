@@ -65,6 +65,10 @@ services:
     # Only depends on the frontend network
     networks:
       - frontend_network
+    # Needs chitchat ==>
+       # chitchat is an upstream service for nginx.conf
+    depends_on:
+      - chitchat
     restart: always
 
 # Define the networks used for this cluster
