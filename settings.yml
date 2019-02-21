@@ -47,6 +47,12 @@ auth:
         roles: [BASIC_GUY, ADMIN]
       salt: 3tl7qo9ntsbjmkve6mdfvoel9tqv6e2nsd323p17mvbccsfbk6j7
       hashedPassword: 2c9b9f23ef927ac501a9d67bb42f007c66ecea60b1040a42d33e130185c39ce4
+    - user:
+        name: myuser
+        roles: [BASIC_GUY, ADMIN]
+      salt: 9u2nuuhlra6b8oum17p5qrgl5dct6tp0j1lnt2pdkbvenup1c20o
+      hashedPassword: 7e6cbbe6762ee7c18903d7c1f86e3602d057ac927f444863fe6c65f36e63a5a2
+
 
 server:
   type: simple
