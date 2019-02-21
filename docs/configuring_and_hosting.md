@@ -76,6 +76,14 @@ sudo curl -L "https://github.com/docker/compose/releases/download/1.23.2/docker-
 sudo chmod +x /usr/local/bin/docker-compose
 ```
 
+12. Add the chitchat user to the docker sudo group
+
+```shell
+sudo usermod -a -G docker chitchat
+```
+
+IMPORTANT! Log out of the shell using `exit` and log back in.
+
 12. Clone the ChitChat repository
 
 ```
