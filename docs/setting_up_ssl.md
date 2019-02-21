@@ -130,10 +130,22 @@ nginx:
   restart: always
 ```
 
-Finally, we need to ensure that the SSL certificate is updated frequently so it doesn't expire. Execute `sudo crontab -e` and add the following lines:
+9. On your server, open up the `nginx-ssl.conf` document and replace any instance of `YOURSERVERNAME` and `YOURDOMAINNAME` with the same values you used in step 8.
 
-```bash
-0 23 * * * docker run --rm -it --name certbot -v "/docker-volumes/etc/letsencrypt:/etc/letsencrypt" -v "/docker-volumes/var/lib/letsencrypt:/var/lib/letsencrypt" -v "/docker-volumes/data/letsencrypt:/data/letsencrypt" -v "/docker-volumes/var/log/letsencrypt:/var/log/letsencrypt" certbot/certbot renew --webroot -w /data/letsencrypt --quiet && docker kill --signal=HUP chitchat-docker_nginx_1
+```shell
+nano nginx-ssl.conf
 ```
 
-Now execute `docker-compose up -d`. The server should now configure itself in the background and will be accessible at https://YOURDOMAIN.EXTENSION
+![SSL_FINAL](img/SSLfinal.png)
+
+Next, hit `CONTROL + X`, `Y` and `<ENTER>` to save the changes.
+
+10. Finally, we need to ensure that the SSL certificate is updated frequently so it doesn't expire. Execute `sudo crontab -e` and add the following lines:
+
+```bash
+0 0 1 * * docker run --rm -it --name certbot -v "/docker-volumes/etc/letsencrypt:/etc/letsencrypt" -v "/docker-volumes/var/lib/letsencrypt:/var/lib/letsencrypt" -v "/docker-volumes/data/letsencrypt:/data/letsencrypt" -v "/docker-volumes/var/log/letsencrypt:/var/log/letsencrypt" certbot/certbot renew --webroot -w /data/letsencrypt --quiet && docker kill --signal=HUP chitchat-docker_nginx_1
+```
+
+Hit `CONTROL + X`, `Y` and `<ENTER>`. The letsencrypt certificate will now be renewed every month.
+
+11. Now execute `docker-compose up -d`. The server should now configure itself in the background and will be accessible at https://YOURDOMAIN.EXTENSION
