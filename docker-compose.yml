@@ -57,7 +57,7 @@ services:
   #########################################################
 
   nginx:
-    image: "nginx:1.9"
+    build: ./serve/
     ports:
       - "80:80"
     volumes:

@@ -52,6 +52,14 @@ sudo apt-get install apt-transport-https ca-certificates curl software-propertie
 
 8. Add the docker APT repository
 
+First, install
+
+```
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+```
+
+then, run
+
 ```
 sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
 ```
@@ -59,8 +67,8 @@ sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubun
 9. Install docker
 
 ```
-sudo apt update
-sudo apt install docker-ce
+sudo apt-get update
+sudo apt-get install docker-ce
 ```
 
 10. Install docker-compose
@@ -76,5 +84,9 @@ sudo chmod +x /usr/local/bin/docker-compose
 ```
 
 12. Clone the ChitChat repository
+
+```
+git clone https://github.com/JasperHG90/chitchat-docker.git
+```
 
 13. Follow the setup guide in the repository README
