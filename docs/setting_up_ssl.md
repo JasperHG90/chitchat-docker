@@ -52,13 +52,13 @@ Save the file by hitting `CONTROL` + `X` and then `Y` + `<ENTER>`.
 sudo nano /docker/letsencrypt-docker-nginx/src/letsencrypt/nginx.conf
 ```
 
-and copy-paste the following:
+In the line below, change `YOURSERVERNAME` to your domain name (e.g. `chitchat.nl`). Then paste it into the terminal
 
 ```conf
 server {
     listen 80;
     listen [::]:80;
-    server_name api.fintxt.io;
+    server_name YOURSERVERNAME;
 
     location ~ /.well-known/acme-challenge {
         allow all;
@@ -107,7 +107,7 @@ sudo openssl dhparam -out /docker/letsencrypt-docker-nginx/src/production/dh-par
 
 ![changenginx](img/changenginx.png)
 
-Now, replace the `nginx` block (surrounded by red rectangle in the image above) with the following:
+Now, replace the `nginx` block (surrounded by red rectangle in the image above) with the following. **NOTE: Make sure that you replace <YOURDOMAINNAME> with the domain name you used in step 4**:
 
 ```yml
 nginx:
@@ -118,8 +118,8 @@ nginx:
   volumes:
     - ./nginx-ssl.conf:/etc/nginx/nginx.conf:ro
     - /docker/letsencrypt-docker-nginx/src/production/dh-param/dhparam.pem:/etc/ssl/certs/dhparam-2048.pem
-    - /docker-volumes/etc/letsencrypt/live/dashboard.fintxt.io/fullchain.pem:/etc/letsencrypt/live/dashboard.fintxt.io/fullchain.pem
-    - /docker-volumes/etc/letsencrypt/live/dashboard.fintxt.io/privkey.pem:/etc/letsencrypt/live/dashboard.fintxt.io/privkey.pem
+    - /docker-volumes/etc/letsencrypt/live/<YOURDOMAINNAME>/fullchain.pem:/etc/letsencrypt/live/<YOURDOMAINNAME>/fullchain.pem
+    - /docker-volumes/etc/letsencrypt/live/<YOURDOMAINNAME>/privkey.pem:/etc/letsencrypt/live/<YOURDOMAINNAME>/privkey.pem
   # Only depends on the frontend network
   networks:
     - frontend_network
