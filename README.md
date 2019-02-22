@@ -17,7 +17,7 @@ But that's pretty much all you need :-).
 
 1. Add yourself to the docker sudo group (recommended)
 
-  - On linux: `sudo usermod -a -G docker chitchat`
+  - On linux: `sudo usermod -a -G docker $USER`
 
 2. Prepend 'sudo' to the command (not recommended)
 
