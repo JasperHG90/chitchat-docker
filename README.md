@@ -31,7 +31,7 @@ in a terminal. See 'manual setup' if you want to manually configure ChitChat.
 
 For more information about the setup of the ChitChat docker environment, see [this](https://github.com/JasperHG90/chitchat-docker/blob/master/docs/chitchat_docker.md) document.
 
-## Manual setup
+### Manual setup
 
 You can follow the manual setup [here](https://github.com/JasperHG90/chitchat-docker/blob/master/docs/manual_setup.md)
 
