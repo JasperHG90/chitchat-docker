@@ -13,7 +13,13 @@ But that's pretty much all you need :-).
 
 ## Initial setup
 
-**NOTE:** You may need to use superuser ('sudo') privileges for the commands below. If you see a permissions error, simply prepend 'sudo' to the command.
+**NOTE:** You may need to use superuser ('sudo') privileges for the commands below. You have two options if you see a permissions error:
+
+1. Add yourself to the docker sudo group (recommended)
+
+  - On linux: `sudo usermod -a -G docker chitchat`
+
+2. Prepend 'sudo' to the command (not recommended)
 
 The initial setup of chitchat can be configured by calling:
 

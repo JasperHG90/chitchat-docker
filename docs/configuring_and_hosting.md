@@ -98,8 +98,10 @@ cd chitchat-docker
 
 13. Set up the docker environment
 
+**NOTE:** You should not need to use `sudo` here because you added the chitchat user to the docker group. If these commands fail, try with sudo.
+
 ```shell
-sudo bash bootstrap.sh
+bash bootstrap.sh
 ```
 
 14. On the server, execute
@@ -119,6 +121,6 @@ The line should be changed to either:
 
 press `control + X`, then `Y` and then `<enter>` to save the settings.
 
-15. You can now execute `sudo docker-compose up -d` and go to either http://myipaddress or http://www.mywebsite.myextension to view the docker service.
+15. You can now execute `docker-compose up -d` and go to either http://myipaddress or http://www.mywebsite.myextension to view the docker service.
 
 16. (optional, but recommended) Head over to the [adding SSL encryption](https://github.com/JasperHG90/chitchat-docker/blob/master/docs/setting_up_ssl.md) tutorial to set up SSL.
