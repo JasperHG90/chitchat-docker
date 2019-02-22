@@ -81,7 +81,7 @@ You may also do this [manually](https://github.com/JasperHG90/chitchat-docker/bl
 
 ## If you know what you're doing ...
 
-If you would like to use a specific version of ChitChat (basically down to the commit), then you should change [this line](https://github.com/JasperHG90/chitchat-docker/blob/master/build/Dockerfile#L5) in `build/Dockerfile`.
+If you would like to use a specific version of ChitChat (basically down to the commit), then you should change [this line](https://github.com/JasperHG90/chitchat-docker/blob/master/build/Dockerfile#L8) in `build/Dockerfile`.
 
 Then, stop the ChitChat services
 
