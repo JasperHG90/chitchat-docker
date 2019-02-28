@@ -13,7 +13,7 @@ This software depends on a working installation of:
 
 But that's pretty much all you need :-).
 
-## Initial setup
+### Initial setup
 
 **NOTE:** You may need to use superuser ('sudo') privileges for the commands below. You have two options if you see a permissions error:
 
@@ -31,7 +31,7 @@ bash bootstrap.sh
 
 in a terminal.
 
-## Running chitchat
+### Running chitchat
 
 To run ChitChat, execute
 
@@ -47,7 +47,7 @@ To shut down the service, execute
 docker-compose down
 ```
 
-## Which version of ChitChat am I using?
+### Which version of ChitChat am I using?
 
 After the (manual) configuration of ChitChat, you will find a file called `VERSION.txt` in the root folder that contains the ChitChat version you're currently using.
 
