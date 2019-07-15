@@ -4,6 +4,7 @@
 docker build build/. -t chitchat/chitchat_build
 
 # Call build container
+# By mounting the volume 'chitchat' it is created as persistent storage
 docker run --rm --mount source=chitchat,target=/var/chitchat chitchat/chitchat_build
 
 # Copy local settings to the 'chitchat' volume using the 'helper' container
